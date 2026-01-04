@@ -6,15 +6,13 @@ import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 import org.hibernate.annotations.CreationTimestamp
-import java.sql.Timestamp
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "habit")
 class Habit (
     @Column(name = "title")
-    val title: String,
+    var title: String,
 
     @Column(name = "createdAt", nullable = false)
     @CreationTimestamp
