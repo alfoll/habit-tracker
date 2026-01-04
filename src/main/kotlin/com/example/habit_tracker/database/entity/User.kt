@@ -8,12 +8,12 @@ import jakarta.persistence.Table
 @Table(name = "`user`")
 class User (
     @Column(name = "name", nullable = false)
-    val name: String,
+    var name: String,
 
     @Column(name  = "email", nullable = false, unique = true)
-    val email: String,
+    var email: String,
 
     @Column(name = "passwordHash", nullable = false)
-    val passwordHash: String
+    var passwordHash: String
 ) : AbstractClassEntity () {
 }
