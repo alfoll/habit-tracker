@@ -1,6 +1,7 @@
 package com.example.habit_tracker.controller
 
-import com.example.habit_tracker.model.dto.HabitDTO
+import com.example.habit_tracker.model.dto.HabitRegistrationDTO
+import com.example.habit_tracker.model.dto.HabitResponseDTO
 import com.example.habit_tracker.service.HabitService
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -19,17 +20,17 @@ class HabitController (
     private val habitService: HabitService,
 ) {
     @GetMapping("/{id}")
-    fun getHabitById(@PathVariable("id") id: Long): HabitDTO = habitService.getHabitById(id)
+    fun getHabitById(@PathVariable("id") id: Long): HabitResponseDTO = habitService.getHabitById(id)
 
     @GetMapping
-    fun getUsersHabits(@RequestParam userId: Long): List<HabitDTO> = habitService.getUsersHabits(userId)
+    fun getUsersHabits(@RequestParam userId: Long): List<HabitResponseDTO> = habitService.getUsersHabits(userId)
 
     @DeleteMapping("/{id}")
     fun deleteHabit(@PathVariable("id") id: Long) = habitService.deleteHabit(id)
 
     @PostMapping
-    fun createHabit(@RequestBody habit: HabitDTO): HabitDTO = habitService.createHabit(habit)
+    fun createHabit(@RequestBody habit: HabitRegistrationDTO): HabitResponseDTO = habitService.createHabit(habit)
 
     @PutMapping("/{id}")
-    fun updateHabit(@PathVariable id: Long, @RequestBody habit: HabitDTO): HabitDTO = habitService.updateHabit(id, habit)
+    fun updateHabit(@PathVariable id: Long, @RequestBody habit: HabitRegistrationDTO): HabitResponseDTO = habitService.updateHabit(id, habit)
 }

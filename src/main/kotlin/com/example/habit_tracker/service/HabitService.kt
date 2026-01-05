@@ -1,13 +1,14 @@
 package com.example.habit_tracker.service
 
-import com.example.habit_tracker.model.dto.HabitDTO
+import com.example.habit_tracker.model.dto.HabitRegistrationDTO
+import com.example.habit_tracker.model.dto.HabitResponseDTO
 
 interface HabitService {
-    fun createHabit(habit: HabitDTO): HabitDTO
-    fun updateHabit(id: Long, habit: HabitDTO): HabitDTO
+    fun createHabit(habit: HabitRegistrationDTO): HabitResponseDTO
+    fun updateHabit(id: Long, habit: HabitRegistrationDTO): HabitResponseDTO
 
     fun deleteHabit(id: Long)
 
-    fun getUsersHabits(userId: Long): List<HabitDTO>
-    fun getHabitById(id: Long): HabitDTO
+    fun getUsersHabits(userId: Long): List<HabitResponseDTO>
+    fun getHabitById(id: Long): HabitResponseDTO
 }
