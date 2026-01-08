@@ -1,7 +1,6 @@
 package com.example.habit_tracker.controller
 
-import com.example.habit_tracker.model.dto.UserRegistrarionDTO
-import com.example.habit_tracker.model.dto.UserResponseDTO
+import com.example.habit_tracker.model.dto.UserRegistrationDTO
 import com.example.habit_tracker.service.UserService
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(value = ["/users"])
+@RequestMapping(value = ["/api/users"])
 class UserController (
     private val userService: UserService
 ) {
@@ -24,10 +23,10 @@ class UserController (
     fun getUserById(@PathVariable id: Long) = userService.getUserById(id)
 
     @PostMapping
-    fun saveUser(@RequestBody body: UserRegistrarionDTO) = userService.saveUser(body)
+    fun saveUser(@RequestBody body: UserRegistrationDTO) = userService.saveUser(body)
 
     @PutMapping("/{id}")
-    fun updateUser(@PathVariable("id") id: Long, @RequestBody body: UserRegistrarionDTO) = userService.updateUser(id, body)
+    fun updateUser(@PathVariable("id") id: Long, @RequestBody body: UserRegistrationDTO) = userService.updateUser(id, body)
 
     @DeleteMapping("/{id}")
     fun deleteUser(@PathVariable("id") id: Long) = userService.deleteUser(id)

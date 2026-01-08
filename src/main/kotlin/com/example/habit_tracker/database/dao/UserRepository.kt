@@ -4,5 +4,5 @@ import com.example.habit_tracker.database.entity.User
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface UserRepository : JpaRepository<User, Long> {
-//    fun findByEmail(id: Long): User?
+    fun findUserByEmail(email: String): User?
 }

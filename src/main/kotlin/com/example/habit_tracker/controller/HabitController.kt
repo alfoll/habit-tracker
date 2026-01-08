@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 
 
 @RestController
-@RequestMapping(value = ["/habits"])
+@RequestMapping(value = ["/api/habits"])
 class HabitController (
     private val habitService: HabitService,
 ) {

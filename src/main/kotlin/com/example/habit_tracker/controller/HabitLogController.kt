@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDate
 
 @RestController
-@RequestMapping(value = ["/habits/{habitId}/logs"])
+@RequestMapping(value = ["/api/habits/{habitId}/logs"])
 class HabitLogController (
     private val habitLogService: HabitLogService,
 ) {
