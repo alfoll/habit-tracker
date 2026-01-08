@@ -5,6 +5,8 @@ import com.example.habit_tracker.model.dto.UserResponseDTO
 
 interface UserService {
 
+    fun ping() : Boolean
+
     fun getUsers(): List<UserResponseDTO>
     fun getUserById(id: Long): UserResponseDTO
 

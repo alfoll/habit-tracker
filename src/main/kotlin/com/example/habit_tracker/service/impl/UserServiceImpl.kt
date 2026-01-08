@@ -17,6 +17,16 @@ class UserServiceImpl(
     private val userRepository: UserRepository,
     private val passwordEncoder: PasswordEncoder
 ) : UserService {
+
+    override fun ping(): Boolean {
+        try {
+            userRepository.count()
+            return true
+        } catch (ex: Exception) {
+            return false
+        }
+    }
+
     override fun getUsers(): List<UserResponseDTO> =
         userRepository.findAll().map { it.toDto() }
 

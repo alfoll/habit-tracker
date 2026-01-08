@@ -2,7 +2,6 @@ package com.example.habit_tracker.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
@@ -25,9 +24,10 @@ class SecurityConfiguration (
             .csrf { it.disable() }
             .authorizeHttpRequests {
                 it
-                    .requestMatchers("/api/auth/**").permitAll()
-                    .requestMatchers(HttpMethod.POST).permitAll()
-                    .anyRequest().fullyAuthenticated()
+                    .requestMatchers("/api/ping").permitAll()
+                    .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
+                    .requestMatchers("/api/habits/**").authenticated()
+                    .anyRequest().authenticated()
             }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .authenticationProvider(authenticationProvider)
