@@ -18,15 +18,9 @@ spring:
       ddl-auto: update # create-drop
     show-sql: true
 
-  server:
-    port: 8080
-
-#  security:
-#    user:
-#      name: alfoll
-#      password: shatla
+server:
+  port: 8080
 
 jwt:
   key: ${JWT_KEY:alfoll-secret-key-for-application}
-  access-token-expiration: 3600000
-  refresh-token-expiration: 86400000
+  access-token-expiration: 43200000
