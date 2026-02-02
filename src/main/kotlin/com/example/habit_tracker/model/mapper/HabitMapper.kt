@@ -5,10 +5,11 @@ import com.example.habit_tracker.database.entity.User
 import com.example.habit_tracker.model.dto.HabitRegistrationDTO
 import com.example.habit_tracker.model.dto.HabitResponseDTO
 
-fun Habit.toDto() = HabitResponseDTO(
+fun Habit.toDto(doneCount: Int = 0) = HabitResponseDTO(
     id = id,
     title = title,
     createdAt = createdAt,
+    doneCount = doneCount,
 )
 
 fun HabitRegistrationDTO.toEntity(user: User): Habit {
