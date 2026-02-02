@@ -3,9 +3,9 @@ spring:
     name: habit-tracker
 
   datasource:
-    url: jdbc:h2:mem:habit_tracker_db # менять на file или что то другое?
-    username: alfoll
-    password:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.h2.Driver
 
   h2:
@@ -22,5 +22,5 @@ server:
   port: 8080
 
 jwt:
-  key: ${JWT_KEY:alfoll-secret-key-for-application}
+  key: ${JWT_KEY}
   access-token-expiration: 43200000
