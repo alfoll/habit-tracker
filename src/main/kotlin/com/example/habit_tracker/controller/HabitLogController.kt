@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import java.security.Principal
 import java.time.LocalDate
 
 @RestController
@@ -18,14 +19,17 @@ class HabitLogController (
     private val habitLogService: HabitLogService,
 ) {
     @GetMapping
-    fun getStatsByHabitId(@PathVariable("habitId") habitId: Long) = habitLogService.getStatsByHabitId(habitId)
+    fun getStatsByHabitId(@PathVariable habitId: Long, principal: Principal) =
+        habitLogService.getLogsByHabitId(habitId, principal.name)
 
     @GetMapping("/period")
-    fun getStatsByHabitIdInPeriod(@PathVariable("habitId") habitId: Long,
+    fun getStatsByHabitIdInPeriod(@PathVariable habitId: Long,
                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) from: LocalDate,
-                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) to: LocalDate) =
-        habitLogService.getStatsByHabitIdInPeriod(habitId, from, to)
+                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) to: LocalDate,
+                                  principal: Principal) =
+        habitLogService.getLogsByHabitIdInPeriod(habitId, from, to, principal.name)
 
     @PostMapping
-    fun createLog(@RequestBody log: HabitLogDTO) = habitLogService.createLog(log)
+    fun createLog(@PathVariable habitId: Long, @RequestBody log: HabitLogDTO, principal: Principal): HabitLogDTO =
+        habitLogService.createLog(habitId, log, principal.name)
 }

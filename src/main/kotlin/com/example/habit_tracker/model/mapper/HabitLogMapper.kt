@@ -8,7 +8,6 @@ import java.time.LocalDate
 fun HabitLog.toDto() = HabitLogDTO(
     date = date,
     done = done,
-    habitId = habit.id,
 )
 
 fun HabitLogDTO.toEntity(habit: Habit): HabitLog {

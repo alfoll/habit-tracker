@@ -1,28 +1,25 @@
 package com.example.habit_tracker.service.impl
 
 import com.example.habit_tracker.database.dao.HabitLogRepository
-import com.example.habit_tracker.database.dao.HabitRepository
 import com.example.habit_tracker.model.dto.HabitLogDTO
-import com.example.habit_tracker.model.dto.StatsDTO
 import com.example.habit_tracker.model.mapper.toDto
 import com.example.habit_tracker.model.mapper.toEntity
 import com.example.habit_tracker.service.HabitLogService
-import org.springframework.data.repository.findByIdOrNull
+import com.example.habit_tracker.service.HabitService
 import org.springframework.stereotype.Service
 import java.time.LocalDate
 
 @Service
 class HabitLogServiceImpl (
     private val habitLogRepository: HabitLogRepository,
-    private val habitRepository: HabitRepository
+    private val habitService: HabitService
 ) : HabitLogService {
-    override fun createLog(log: HabitLogDTO): HabitLogDTO {
+    override fun createLog(habitId: Long, log: HabitLogDTO, email: String): HabitLogDTO {
         val date = log.date ?: LocalDate.now()
 
-        val habit = habitRepository.findByIdOrNull(log.habitId)
-        if (habit == null) throw RuntimeException("Habit with id ${log.habitId} was not found")
+        val habit = habitService.getHabitExc(habitId, email)
 
-        val existingLog = habitLogRepository.findLogByHabitIdAndDate(log.habitId, date)
+        val existingLog = habitLogRepository.findLogByHabitIdAndDate(habitId, date)
 
         if (existingLog != null) {
             existingLog.done = log.done
@@ -31,25 +28,21 @@ class HabitLogServiceImpl (
         return habitLogRepository.save(log.toEntity(habit)).toDto()
     }
 
-    override fun getStatsByHabitId(habitId: Long): StatsDTO {
-        val habit = habitRepository.findByIdOrNull(habitId)
+    override fun getLogsByHabitId(habitId: Long, email: String): List<HabitLogDTO> {
+        val habit = habitService.getHabitExc(habitId, email)
 
-        if (habit == null) throw RuntimeException("Habit with id $habitId was not found")
-
-        val list = habitLogRepository.findLogByHabitIdAndDateBetween(habitId,
+        return habitLogRepository.findLogByHabitIdAndDateBetween(habit.id,
             habit.createdAt.toLocalDate(),
             LocalDate.now())
-            .filter { it.done }
-
-        return StatsDTO(habitId, habit.createdAt.toLocalDate(), LocalDate.now(), list.count())
+            .map { it.toDto() }
     }
 
-    override fun getStatsByHabitIdInPeriod(habitId: Long, from: LocalDate, to: LocalDate): StatsDTO {
+    override fun getLogsByHabitIdInPeriod(habitId: Long, from: LocalDate, to: LocalDate, email: String): List<HabitLogDTO> {
         if (from > to) throw RuntimeException("From ($from) must be less than To ($to)")
 
-        val list = habitLogRepository.findLogByHabitIdAndDateBetween(habitId, from, to)
-            .filter { it.done }
+        val habit = habitService.getHabitExc(habitId, email)
 
-        return StatsDTO(habitId, from, to, list.count())
+        return habitLogRepository.findLogByHabitIdAndDateBetween(habit.id, from, to)
+            .map { it.toDto() }
     }
 }

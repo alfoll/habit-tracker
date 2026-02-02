@@ -16,7 +16,7 @@ class HabitServiceImpl (
     private val userRepository: UserRepository,
 ) : HabitService {
 
-    private fun getHabitExc(id: Long, email: String): Habit {
+    override fun getHabitExc(id: Long, email: String): Habit {
         val user = userRepository.findUserByEmail(email)
             ?: throw RuntimeException("User with email $email not found")
 
