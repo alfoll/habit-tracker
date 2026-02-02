@@ -9,7 +9,6 @@ fun Habit.toDto() = HabitResponseDTO(
     id = id,
     title = title,
     createdAt = createdAt,
-    userId = user.id,
 )
 
 fun HabitRegistrationDTO.toEntity(user: User): Habit {

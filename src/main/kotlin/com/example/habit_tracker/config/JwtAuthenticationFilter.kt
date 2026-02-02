@@ -45,6 +45,4 @@ class JwtAuthenticationFilter (
             filterChain.doFilter(request, response)
         }
     }
-
-
 }

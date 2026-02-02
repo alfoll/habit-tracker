@@ -4,11 +4,11 @@ import com.example.habit_tracker.model.dto.HabitRegistrationDTO
 import com.example.habit_tracker.model.dto.HabitResponseDTO
 
 interface HabitService {
-    fun createHabit(habit: HabitRegistrationDTO): HabitResponseDTO
-    fun updateHabit(id: Long, habit: HabitRegistrationDTO): HabitResponseDTO
+    fun createHabit(habit: HabitRegistrationDTO, email: String): HabitResponseDTO
+    fun updateHabit(id: Long, habit: HabitRegistrationDTO, email: String): HabitResponseDTO
 
-    fun deleteHabit(id: Long)
+    fun deleteHabit(id: Long, email: String)
 
-    fun getUsersHabits(userId: Long): List<HabitResponseDTO>
-    fun getHabitById(id: Long): HabitResponseDTO
+    fun getUsersHabits(email: String): List<HabitResponseDTO>
+    fun getHabitById(id: Long, email: String): HabitResponseDTO
 }
