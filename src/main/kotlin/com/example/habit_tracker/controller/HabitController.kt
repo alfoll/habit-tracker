@@ -20,7 +20,7 @@ class HabitController (
     private val habitService: HabitService,
 ) {
     @GetMapping("/{id}")
-    fun getHabitById(@PathVariable("id") id: Long, principal: Principal): HabitResponseDTO =
+    fun getHabitById(@PathVariable id: Long, principal: Principal): HabitResponseDTO =
         habitService.getHabitById(id, principal.name)
 
     @GetMapping
@@ -28,7 +28,7 @@ class HabitController (
         habitService.getUsersHabits(principal.name)
 
     @DeleteMapping("/{id}")
-    fun deleteHabit(@PathVariable("id") id: Long, principal: Principal) =
+    fun deleteHabit(@PathVariable id: Long, principal: Principal) =
         habitService.deleteHabit(id, principal.name)
 
     @PostMapping
