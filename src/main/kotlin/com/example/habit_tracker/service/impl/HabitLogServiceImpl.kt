@@ -1,6 +1,7 @@
 package com.example.habit_tracker.service.impl
 
 import com.example.habit_tracker.database.dao.HabitLogRepository
+import com.example.habit_tracker.exception.BadRequestException
 import com.example.habit_tracker.model.dto.HabitLogDTO
 import com.example.habit_tracker.model.mapper.toDto
 import com.example.habit_tracker.model.mapper.toEntity
@@ -38,7 +39,7 @@ class HabitLogServiceImpl (
     }
 
     override fun getLogsByHabitIdInPeriod(habitId: Long, from: LocalDate, to: LocalDate, email: String): List<HabitLogDTO> {
-        if (from > to) throw RuntimeException("From ($from) must be less than To ($to)")
+        if (from > to) throw BadRequestException("From ($from) must be less than To ($to)")
 
         val habit = habitService.getHabitExc(habitId, email)
 

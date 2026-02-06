@@ -5,6 +5,7 @@ import com.example.habit_tracker.model.dto.AuthResponseDTO
 import com.example.habit_tracker.model.dto.UserRegistrationDTO
 import com.example.habit_tracker.service.AuthService
 import com.example.habit_tracker.service.UserService
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -17,7 +18,7 @@ class AuthController (
     private val userService: UserService,
 ) {
     @PostMapping("/register")
-    fun register(@RequestBody userRegister: UserRegistrationDTO): AuthResponseDTO {
+    fun register(@Valid @RequestBody userRegister: UserRegistrationDTO): AuthResponseDTO {
         userService.saveUser(userRegister)
 
         val auth = authService

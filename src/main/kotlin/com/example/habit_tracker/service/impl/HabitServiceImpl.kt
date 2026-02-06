@@ -4,6 +4,7 @@ import com.example.habit_tracker.database.dao.HabitLogRepository
 import com.example.habit_tracker.database.dao.HabitRepository
 import com.example.habit_tracker.database.dao.UserRepository
 import com.example.habit_tracker.database.entity.Habit
+import com.example.habit_tracker.exception.EntityNotFoundException
 import com.example.habit_tracker.model.dto.HabitRegistrationDTO
 import com.example.habit_tracker.model.dto.HabitResponseDTO
 import com.example.habit_tracker.model.mapper.toDto
@@ -29,18 +30,15 @@ class HabitServiceImpl (
 
     override fun getHabitExc(id: Long, email: String): Habit {
         val user = userRepository.findUserByEmail(email)
-            ?: throw RuntimeException("User with email $email not found")
-
-//        if (habitRepository.findByIdOrNull(id) == null)
-//            throw RuntimeException("Habit with id $id was not found")
+            ?: throw EntityNotFoundException("User with this email not found")
 
         return habitRepository.findByIdAndUserId(id, user.id)
-            ?: throw RuntimeException("Habit with id $id was not found or does not belong to this user")
+            ?: throw EntityNotFoundException("Habit with this id was not found or does not belong to this user")
     }
 
     override fun createHabit(habit: HabitRegistrationDTO, email: String): HabitResponseDTO {
         val user = userRepository.findUserByEmail(email)
-            ?: throw RuntimeException("User with email $email not found")
+            ?: throw EntityNotFoundException("User with this email not found")
 
         return habitRepository.save(habit.toEntity(user)).toDto()
     }
@@ -63,7 +61,7 @@ class HabitServiceImpl (
 
     override fun getUsersHabits(email: String): List<HabitResponseDTO> {
         val user = userRepository.findUserByEmail(email)
-            ?: throw RuntimeException("User with email $email not found")
+            ?: throw EntityNotFoundException("User with this email not found")
 
         return habitRepository.findAllByUserId(user.id)
             .map { it.toDto(getDoneCount(it)) }

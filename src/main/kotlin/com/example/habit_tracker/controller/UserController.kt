@@ -22,8 +22,8 @@ class UserController (
     fun getUserById(@PathVariable id: Long) = userService.getUserById(id)
 
     @PutMapping("/{id}")
-    fun updateUser(@PathVariable("id") id: Long, @RequestBody body: UserRegistrationDTO) = userService.updateUser(id, body)
+    fun updateUser(@PathVariable id: Long, @RequestBody body: UserRegistrationDTO) = userService.updateUser(id, body)
 
     @DeleteMapping("/{id}")
-    fun deleteUser(@PathVariable("id") id: Long) = userService.deleteUser(id)
+    fun deleteUser(@PathVariable id: Long) = userService.deleteUser(id)
 }
