@@ -38,16 +38,16 @@ Backend-приложение для трекинга привычек, реал�
 **Тело запроса (JSON):**
 ```json
 {
-  "name": "Иван Иванов",
+  "name": "Your name",
   "email": "user@example.com",
-  "password": "your_password"
+  "password": "your_password (min size = 8)"
 }
 ```
 
 **Ответ:**
 ```json
 {
-  "accessToken": "ваш_jwt_токен"
+  "accessToken": "your_jwt_token"
 }
 ```
 
@@ -67,7 +67,7 @@ Backend-приложение для трекинга привычек, реал�
 ### Использование токена
 Полученный токен необходимо передавать в заголовке запроса для доступа к защищенным эндпоинтам:
 ```
-Authorization: Bearer <ваш_токен>
+Authorization: Bearer <your_token>
 ```
 
 📸 Примеры запросов (Postman)
@@ -76,22 +76,35 @@ Authorization: Bearer <ваш_токен>
 <img width="845" height="420" alt="image" src="https://github.com/user-attachments/assets/2d8d6247-d5c5-4d34-94c2-2fea6cdfc552" />
 
 2. **Регистрация пользователя**
-<img width="840" height="480" alt="image" src="https://github.com/user-attachments/assets/2d644a75-c18d-4309-813e-13695c69a675" />
+<img width="858" height="448" alt="image" src="https://github.com/user-attachments/assets/634b9a42-b61b-4eac-9a0b-3aab22278378" />
 
 3. **Вход пользователя**
-<img width="865" height="486" alt="image" src="https://github.com/user-attachments/assets/625ab121-45da-4aeb-b20d-9396962c58f6" />
+<img width="867" height="453" alt="image" src="https://github.com/user-attachments/assets/e5ffc87e-bca6-4feb-b423-7b26d1834b0b" />
 
 4. **Создание привычки**
-<img width="870" height="505" alt="image" src="https://github.com/user-attachments/assets/cf9bfc3a-710d-4d35-9cac-b0143728c275" />
+<img width="853" height="479" alt="image" src="https://github.com/user-attachments/assets/9233eb0e-129d-46c9-97c4-9c697eae8076" />
 
-5. **Получение привычки юзера**
-<img width="845" height="517" alt="image" src="https://github.com/user-attachments/assets/57047eea-067a-4dcf-bb29-f03c2461cbe5" />
+5. **Получение привычек юзера**
+<img width="855" height="548" alt="image" src="https://github.com/user-attachments/assets/c840d2ef-7d24-40e6-8f1a-fdf68dda4cc5" />
 
-6. **Установление лога на привычку**
-<img width="859" height="483" alt="image" src="https://github.com/user-attachments/assets/2e3fcd02-e00b-4fc2-b3e0-b50c7335d336" />
+6. **Получение привычки юзера по id привычки**
+<img width="863" height="473" alt="image" src="https://github.com/user-attachments/assets/3baa657f-fc2e-4a04-aca7-d3adf3005ed6" />
 
-7. **Получение статистики**
-<img width="858" height="513" alt="image" src="https://github.com/user-attachments/assets/ba9a2561-b611-43cb-b94b-d03a5e63b1e4" />
+7. **Изменение привычки (только название) по id привычки**
+<img width="853" height="442" alt="image" src="https://github.com/user-attachments/assets/d14b1578-f6e8-49af-ad8f-814a5f675b2c" />
+
+8. **Удаление привычки**
+<img width="848" height="392" alt="image" src="https://github.com/user-attachments/assets/99a04c33-2a51-4796-ace9-59b8b04c01ce" />
+
+9. **Установление лога на привычку**
+<img width="853" height="432" alt="image" src="https://github.com/user-attachments/assets/edc2c2c3-08f8-4998-af5e-7a2b4dcd3a1a" />
+
+10. **Получение всех логов привычки по id привычки**
+<img width="853" height="470" alt="image" src="https://github.com/user-attachments/assets/a6c293f3-fe4b-493e-9ce6-b12943cbdc44" />
+
+11. **Получение всех логов привычки за период**
+<img width="852" height="613" alt="image" src="https://github.com/user-attachments/assets/2a493710-69f6-4234-bd08-e708e0e9d5e9" />
+
 
 ## 🗃️ Сущности и связи
 
