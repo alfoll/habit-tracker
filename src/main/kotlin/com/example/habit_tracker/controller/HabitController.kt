@@ -3,6 +3,7 @@ package com.example.habit_tracker.controller
 import com.example.habit_tracker.model.dto.HabitRegistrationDTO
 import com.example.habit_tracker.model.dto.HabitResponseDTO
 import com.example.habit_tracker.service.HabitService
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 import java.security.Principal
 
@@ -23,11 +25,12 @@ class HabitController (
     fun getHabitById(@PathVariable id: Long, principal: Principal): HabitResponseDTO =
         habitService.getHabitById(id, principal.name)
 
-    @GetMapping
+    @GetMapping("myHabits")
     fun getUsersHabits(principal: Principal): List<HabitResponseDTO> =
         habitService.getUsersHabits(principal.name)
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteHabit(@PathVariable id: Long, principal: Principal) =
         habitService.deleteHabit(id, principal.name)
 

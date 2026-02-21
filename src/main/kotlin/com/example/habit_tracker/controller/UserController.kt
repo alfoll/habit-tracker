@@ -2,12 +2,14 @@ package com.example.habit_tracker.controller
 
 import com.example.habit_tracker.model.dto.UserRegistrationDTO
 import com.example.habit_tracker.service.UserService
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -25,5 +27,6 @@ class UserController (
     fun updateUser(@PathVariable id: Long, @RequestBody body: UserRegistrationDTO) = userService.updateUser(id, body)
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteUser(@PathVariable id: Long) = userService.deleteUser(id)
 }

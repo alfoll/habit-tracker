@@ -19,11 +19,11 @@ class HabitLogController (
     private val habitLogService: HabitLogService,
 ) {
     @GetMapping
-    fun getStatsByHabitId(@PathVariable habitId: Long, principal: Principal) =
+    fun getLogsByHabitId(@PathVariable habitId: Long, principal: Principal) =
         habitLogService.getLogsByHabitId(habitId, principal.name)
 
     @GetMapping("/period")
-    fun getStatsByHabitIdInPeriod(@PathVariable habitId: Long,
+    fun getLogsByHabitIdInPeriod(@PathVariable habitId: Long,
                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) from: LocalDate,
                                   @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) to: LocalDate,
                                   principal: Principal) =
