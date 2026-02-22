@@ -27,12 +27,8 @@ class UserServiceImpl(
         }
     }
 
-    override fun getUsers(): List<UserResponseDTO> {
-        val list = userRepository.findAll()
-        if (list.isEmpty())
-            throw EntityNotFoundException()
-        return list.map { it.toDto() }
-    }
+    override fun getUsers(): List<UserResponseDTO> =
+        userRepository.findAll().map { it.toDto() }
 
     override fun saveUser(user: UserRegistrationDTO): UserResponseDTO {
         val existingUserEmail = userRepository.findUserByEmail(user.email)
